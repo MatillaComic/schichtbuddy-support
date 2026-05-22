@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support &amp; FAQ – SchichtBuddy</title>
+  <meta name="description" content="Häufige Fragen und Support für die SchichtBuddy App. Hier findest du Antworten und Kontaktmöglichkeiten." />
+  <meta name="theme-color" content="#0a0a0f" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Quick Help Cards ────────────────────── */
+    .quick-help {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .quick-card {
+      padding: 1.8rem;
+      text-align: center;
+    }
+
+    .quick-card-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .quick-card h3 { margin-bottom: 0.5rem; font-size: 1rem; }
+    .quick-card p { font-size: 0.875rem; margin-bottom: 1rem; }
+    .quick-card a { font-size: 0.875rem; }
+
+    /* ── FAQ ─────────────────────────────────── */
+    .faq-category {
+      margin-bottom: 3rem;
+    }
+
+    .faq-category-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-category-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      transition: border-color var(--transition);
+      background: var(--bg-card);
+    }
+
+    .faq-item:hover,
+    .faq-item.open {
+      border-color: var(--border-hover);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      user-select: none;
+      gap: 1rem;
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 300;
+      transition: transform var(--transition), color var(--transition);
+    }
+
+    .faq-item.open .faq-icon {
+      color: var(--text);
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem;
+    }
+
+    .faq-answer-inner {
+      padding-bottom: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    .faq-answer-inner p { margin-bottom: 0.6rem; color: var(--text-secondary); font-size: 0.9rem; }
+    .faq-answer-inner p:last-child { margin-bottom: 0; }
+    .faq-answer-inner ul { padding-left: 1.2rem; }
+    .faq-answer-inner li { margin-bottom: 0.3rem; color: var(--text-secondary); font-size: 0.9rem; }
+    .faq-answer-inner strong { color: var(--text); }
+    .faq-answer-inner code {
+      background: rgba(79,195,247,0.1);
+      border: 1px solid rgba(79,195,247,0.2);
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      font-size: 0.85em;
+      color: var(--accent);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Contact ─────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      padding: 2rem;
+    }
+
+    .contact-card-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h3 { margin-bottom: 0.6rem; }
+    .contact-card p { font-size: 0.9rem; margin-bottom: 1.2rem; }
+
+    .contact-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(102,187,106,0.1);
+      border: 1px solid rgba(102,187,106,0.25);
+      color: #66bb6a;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: inline-flex;
+    }
+
+    .version-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .version-box span strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 768px) {
+      .quick-help { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .quick-help { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Hauptnavigation">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">⏱</div>
+    SchichtBuddy
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="support.html" class="active">Support</a></li>
+    <li><a href="privacy.html">Datenschutz</a></li>
+  </ul>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Hilfe &amp; FAQ</span>
+    <h1 class="fade-in">Support</h1>
+    <p class="fade-in fade-in-delay-1">Hier findest du Antworten auf häufige Fragen. Nicht das Richtige dabei? Schreib uns.</p>
+  </div>
+</div>
+
+<section style="padding-top: 0;">
+  <div class="container">
+
+    <!-- Quick Help -->
+    <div class="quick-help">
+      <div class="glass card quick-card fade-in fade-in-delay-1">
+        <span class="quick-card-icon">📧</span>
+        <h3>E-Mail Support</h3>
+        <p>Direkt anschreiben, wir antworten innerhalb von 48h.</p>
+        <a href="mailto:support@schichtbuddy.app" class="btn btn-outline">Schreib uns</a>
+      </div>
+      <div class="glass card quick-card fade-in fade-in-delay-2">
+        <span class="quick-card-icon">⭐</span>
+        <h3>App bewerten</h3>
+        <p>Hat dir SchichtBuddy geholfen? Eine Bewertung hilft uns sehr.</p>
+        <a href="https://apps.apple.com/app/schichtbuddy/id000000000" class="btn btn-outline" target="_blank" rel="noopener">App Store</a>
+      </div>
+      <div class="glass card quick-card fade-in fade-in-delay-3">
+        <span class="quick-card-icon">🔒</span>
+        <h3>Datenschutz</h3>
+        <p>Alle Infos zur Datenverarbeitung in unserer Datenschutzerklärung.</p>
+        <a href="privacy.html" class="btn btn-outline">Mehr erfahren</a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="fade-in">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title" style="margin-bottom: 3rem;">Häufige Fragen</h2>
+    </div>
+
+    <!-- Kategorie: Erste Schritte -->
+    <div class="faq-category">
+      <div class="faq-category-label fade-in">🚀 Erste Schritte</div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Wie starte ich mit SchichtBuddy?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Nach dem ersten Start wirst du durch ein kurzes Setup geführt:</p>
+            <ul>
+              <li>Profil anlegen (Name, optional Foto)</li>
+              <li>Deine Schichtvorlagen erstellen (z. B. Früh: 06:00–14:00, Spät: 14:00–22:00)</li>
+              <li>Widget zum Homescreen hinzufügen (lang drücken → Widget hinzufügen → SchichtBuddy)</li>
+            </ul>
+            <p>Danach kannst du sofort mit dem Stempeln loslegen.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Wie füge ich das Widget zum Homescreen hinzu?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Auf dem iPhone/iPad:</p>
+            <ul>
+              <li>Homescreen <strong>lang drücken</strong>, bis die App-Icons wackeln</li>
+              <li>Oben links auf <strong>„+"</strong> tippen</li>
+              <li>Nach <strong>„SchichtBuddy"</strong> suchen</li>
+              <li>Gewünschte Größe auswählen (Klein, Mittel, Groß)</li>
+              <li><strong>Widget hinzufügen</strong> antippen</li>
+            </ul>
+            <p>Das Stempel-Widget (Klein/Mittel) ermöglicht direkt vom Homescreen das Ein- und Ausstempeln ohne die App zu öffnen.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Muss ich mich registrieren oder ein Konto erstellen?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p><strong>Nein.</strong> SchichtBuddy benötigt weder eine Registrierung noch ein Benutzerkonto. Alle Daten werden lokal auf deinem Gerät gespeichert. Es gibt keine Cloud-Synchronisation und keinen Login.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kategorie: Stempeln & Zeiterfassung -->
+    <div class="faq-category">
+      <div class="faq-category-label fade-in">⏱ Stempeln &amp; Zeiterfassung</div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Kann ich vom Widget aus stempeln ohne die App zu öffnen?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p><strong>Ja</strong> – auf iOS 17 und neuer. Das Stempel-Widget unterstützt App Intents: Einstempeln funktioniert direkt per Widget-Tap, ohne die App zu öffnen.</p>
+            <p>Zum <strong>Ausstempeln</strong> öffnet sich die App automatisch, damit du die geleisteten Stunden siehst.</p>
+            <p>Auf iOS 16 öffnet das Widget immer die App.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Ich habe vergessen einzustempeln – kann ich die Zeit nachträglich eintragen?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Ja. Im <strong>Zeitverlauf</strong> (Uhr-Symbol in der App) kannst du:</p>
+            <ul>
+              <li>Bestehende Einträge antippen und bearbeiten (Start, Ende, Datum)</li>
+              <li>Fehlende Tage manuell nachtragen</li>
+              <li>Fehlerhafte Einträge löschen (Swipe nach links)</li>
+            </ul>
+            <p>Das Datum lässt sich ebenfalls ändern, falls du einen Eintrag dem falschen Tag zugeordnet hast.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Was passiert bei einer Nachtschicht (z. B. 22:00 – 06:00)?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>SchichtBuddy erkennt Nachtschichten automatisch. Wenn du am Vortag eingestempelt bist und am nächsten Morgen noch aktiv bist, zeigt die App und das Widget weiterhin die laufende Session an.</p>
+            <p>Das Datum der Schicht wird auf den <strong>Starttag</strong> gesetzt (z. B. Dienstag, 22:00), auch wenn du Mittwoch morgens ausstempelst.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Wie werden Pausen erfasst?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Während einer aktiven Schicht kannst du in der App eine Pause starten und beenden. Die App summiert alle Pausen automatisch und zieht sie von der Netto-Arbeitszeit ab.</p>
+            <p>Gesetzlich vorgeschriebene Mindestpausen (30 Min. ab 6h, 45 Min. ab 9h) werden als Hinweis angezeigt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kategorie: Widgets -->
+    <div class="faq-category">
+      <div class="faq-category-label fade-in">🔲 Widgets</div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Das Widget aktualisiert sich nicht / zeigt alte Daten
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>iOS aktualisiert Widgets aus Energiespar-Gründen nicht in Echtzeit. Versuche:</p>
+            <ul>
+              <li><strong>App einmal öffnen</strong> – das erzwingt eine sofortige Widget-Aktualisierung</li>
+              <li>Widget <strong>lang drücken → Widget bearbeiten</strong> und bestätigen (erzwingt Neustart)</li>
+              <li>iPhone neu starten</li>
+            </ul>
+            <p>Beim Einstempeln per Widget wird der Status sofort optimistisch aktualisiert, das Endresultat nach wenigen Sekunden synchronisiert.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Was bedeuten die Farben im Stempel-Widget?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <ul>
+              <li>🔵 <strong>Dunkel / Neutral</strong> – Noch nicht eingestempelt (Idle)</li>
+              <li>🟢 <strong>Grün</strong> – Aktiv eingestempelt, Schicht läuft</li>
+              <li>💙 <strong>Blau-Grau</strong> – Schicht beendet (Fertig)</li>
+            </ul>
+            <p>Der farbige Streifen oben im Widget und der Statusindikator (doppelter Ring) geben sofort Auskunft über den aktuellen Status.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Das große Widget zeigt zwei Wochen – was ist das?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Das große Wochen-Widget (<code>systemLarge</code>) zeigt die aktuelle und die nächste Woche auf einen Blick. Gearbeitete Tage werden farbig hervorgehoben, der heutige Tag ist markiert.</p>
+            <p>Das mittlere Widget zeigt nur die aktuelle Woche.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kategorie: Daten & Datenschutz -->
+    <div class="faq-category">
+      <div class="faq-category-label fade-in">🔒 Daten &amp; Datenschutz</div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Werden meine Arbeitszeiten in die Cloud hochgeladen?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p><strong>Nein.</strong> SchichtBuddy ist vollständig offline. Es gibt keine Cloud-Synchronisation, keinen Server und keine Internetverbindung. Alle Daten bleiben ausschließlich auf deinem Gerät.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Was passiert mit meinen Daten, wenn ich die App deinstalliere?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Beim Deinstallieren der App werden <strong>alle lokalen Daten</strong> (Arbeitszeiten, Schichten, Einstellungen) unwiderruflich gelöscht. Eine Sicherung ist derzeit nicht möglich. Wir empfehlen, wichtige Auswertungen vor einer Deinstallation zu notieren oder zu fotografieren.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Warum braucht die App Zugriff auf meine Fotos?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Nur wenn du ein <strong>Profilbild</strong> einstellen möchtest. Die Berechtigung ist vollständig optional und wird nur im Profilbereich abgefragt. Das Foto wird lokal gespeichert und nicht übertragen.</p>
+            <p>Du kannst die Berechtigung jederzeit unter <strong>iOS Einstellungen → SchichtBuddy → Fotos</strong> entziehen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kontakt -->
+    <div class="fade-in" style="margin-top: 5rem;">
+      <span class="section-label">Kontakt</span>
+      <h2 class="section-title">Noch Fragen?</h2>
+      <p class="section-subtitle">Keine Antwort gefunden? Schreib uns direkt.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="glass card contact-card fade-in fade-in-delay-1">
+        <span class="contact-card-icon">📧</span>
+        <h3>E-Mail Support</h3>
+        <span class="contact-tag">✓ Antwort in 48h</span>
+        <p>Schreib uns mit einer Beschreibung deines Problems oder deiner Frage. Je mehr Details, desto schneller können wir helfen.</p>
+        <a href="mailto:support@schichtbuddy.app" class="btn btn-primary">support@schichtbuddy.app</a>
+      </div>
+
+      <div class="glass card contact-card fade-in fade-in-delay-2">
+        <span class="contact-card-icon">🐛</span>
+        <h3>Bug melden</h3>
+        <span class="contact-tag">✓ Wird ernst genommen</span>
+        <p>Hast du einen Fehler gefunden? Bitte beschreibe: App-Version, iOS-Version, Schritte zur Reproduktion.</p>
+        <a href="mailto:support@schichtbuddy.app?subject=Bug Report – SchichtBuddy&body=App-Version: %0AiOS-Version: %0ABeschreibung: " class="btn btn-outline">Bug melden</a>
+      </div>
+    </div>
+
+    <div class="version-box fade-in">
+      <span><strong>Aktuelle Version</strong> 1.2.0</span>
+      <span><strong>Plattform</strong> iOS 16+</span>
+      <span><strong>Bundle ID</strong> com.matillacomic.schichtbuddy</span>
+      <span><strong>Support-E-Mail</strong> <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span>© 2026 SchichtBuddy · Matilla Comic</span>
+      <nav class="footer-links" aria-label="Footer Links">
+        <a href="privacy.html">Datenschutz</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:support@schichtbuddy.app">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SchichtBuddy – Smarter Schicht-Tracker</title>
+  <meta name="description" content="SchichtBuddy hilft dir, deine Arbeitszeiten einfach zu erfassen, Pausen zu verwalten und dein Zeitkonto im Blick zu behalten." />
+  <meta name="theme-color" content="#0a0a0f" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Hero ────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(79, 195, 247, 0.1);
+      border: 1px solid rgba(79, 195, 247, 0.2);
+      border-radius: 50px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-title {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #4fc3f7 0%, #81d4fa 50%, #e1f5fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      margin-bottom: 2.5rem;
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Phone mockup ────────────────────────── */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .phone-wrap {
+      position: relative;
+      width: 280px;
+    }
+
+    .phone {
+      width: 280px;
+      height: 560px;
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      border-radius: 44px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone-screen {
+      position: absolute;
+      inset: 12px;
+      background: #0a0a14;
+      border-radius: 34px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 0.8rem;
+    }
+
+    .phone-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.6);
+      padding: 0.2rem 0.4rem 0.6rem;
+    }
+
+    .phone-notch {
+      width: 80px;
+      height: 20px;
+      background: #0a0a14;
+      border-radius: 0 0 12px 12px;
+      margin: 0 auto;
+    }
+
+    .phone-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .phone-app-header {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0;
+    }
+
+    .phone-time-card {
+      background: linear-gradient(135deg, rgba(79,195,247,0.15), rgba(2,136,209,0.08));
+      border: 1px solid rgba(79,195,247,0.2);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .phone-time-label {
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+    }
+
+    .phone-time-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .phone-btn {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-align: center;
+      padding: 0.6rem;
+      border-radius: 10px;
+      margin-top: 0.5rem;
+    }
+
+    .phone-week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+    }
+
+    .phone-day {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.45rem;
+      font-weight: 600;
+    }
+
+    .phone-day.worked { background: rgba(79,195,247,0.25); color: var(--accent); }
+    .phone-day.today { background: var(--accent); color: #000; }
+    .phone-day.off { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3); }
+
+    .phone-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(79,195,247,0.2), transparent);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      filter: blur(40px);
+      z-index: -1;
+    }
+
+    /* ── Features ────────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(79,195,247,0.1);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(79,195,247,0.15);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* ── How it works ────────────────────────── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      counter-reset: steps;
+    }
+
+    .step {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      top: 3rem;
+      right: -0.75rem;
+      width: 1.5rem;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    .step:last-child::after { display: none; }
+
+    .step-number {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, rgba(79,195,247,0.15), rgba(79,195,247,0.05));
+      border: 1px solid rgba(79,195,247,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 auto 1.2rem;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .step p { font-size: 0.875rem; }
+
+    /* ── Download CTA ────────────────────────── */
+    .download-section {
+      text-align: center;
+    }
+
+    .download-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 640px;
+      margin: 3rem auto 0;
+    }
+
+    .download-card {
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .download-card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .download-card h3 { margin-bottom: 0.4rem; }
+    .download-card p { font-size: 0.85rem; }
+
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--accent);
+      color: #000;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .store-badge:hover {
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79,195,247,0.35);
+    }
+    .store-badge.coming-soon {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-secondary);
+      cursor: default;
+    }
+    .store-badge.coming-soon:hover { transform: none; box-shadow: none; }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-visual { display: none; }
+      .hero-actions, .hero-stats { justify-content: center; }
+      .hero-desc { margin: 0 auto 2.5rem; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .step::after { display: none; }
+      .download-cards { grid-template-columns: 1fr; max-width: 340px; }
+    }
+
+    @media (max-width: 560px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  <div class="bg-blob bg-blob-3"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation" aria-label="Hauptnavigation">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">⏱</div>
+    SchichtBuddy
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="support.html">Support</a></li>
+    <li><a href="privacy.html">Datenschutz</a></li>
+    <li><a href="#download" class="nav-cta">Download</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge fade-in">
+          <span>✦</span> Für iOS &amp; Android
+        </div>
+        <h1 class="hero-title fade-in fade-in-delay-1">
+          Dein smarter<br/><span>Schicht-Tracker</span>
+        </h1>
+        <p class="hero-desc fade-in fade-in-delay-2">
+          SchichtBuddy hilft dir, Arbeitszeiten sekundengenau zu erfassen, Pausen zu verwalten und dein Zeitkonto immer im Blick zu behalten – direkt vom Homescreen.
+        </p>
+        <div class="hero-actions fade-in fade-in-delay-3">
+          <a href="#download" class="btn btn-primary">📲 Jetzt herunterladen</a>
+          <a href="support.html" class="btn btn-secondary">FAQ &amp; Hilfe</a>
+        </div>
+        <div class="hero-stats fade-in fade-in-delay-4">
+          <div>
+            <span class="hero-stat-value">iOS 16+</span>
+            <span class="hero-stat-label">Minimum</span>
+          </div>
+          <div>
+            <span class="hero-stat-value">100%</span>
+            <span class="hero-stat-label">Offline</span>
+          </div>
+          <div>
+            <span class="hero-stat-value">0€</span>
+            <span class="hero-stat-label">Keine Abo-Falle</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="phone-glow"></div>
+        <div class="phone-wrap">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>●●●</span>
+              </div>
+              <div class="phone-content">
+                <div class="phone-app-header">SchichtBuddy</div>
+                <div class="phone-time-card">
+                  <div class="phone-time-label">Heute gearbeitet</div>
+                  <div class="phone-time-value">07:32</div>
+                  <div class="phone-btn">Ausstempeln</div>
+                </div>
+                <div class="phone-app-header" style="margin-top:0.4rem">Diese Woche</div>
+                <div class="phone-week-grid">
+                  <div class="phone-day worked">Mo</div>
+                  <div class="phone-day worked">Di</div>
+                  <div class="phone-day worked">Mi</div>
+                  <div class="phone-day today">Do</div>
+                  <div class="phone-day off">Fr</div>
+                  <div class="phone-day off">Sa</div>
+                  <div class="phone-day off">So</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">Alles, was du brauchst</h2>
+      <p class="section-subtitle">Schluss mit Zettelwirtschaft. SchichtBuddy macht Zeiterfassung einfach und angenehm.</p>
+    </div>
+    <div class="features-grid">
+      <div class="card feature-card fade-in fade-in-delay-1">
+        <div class="feature-icon">⏱</div>
+        <h3>Ein-Klick Stempeln</h3>
+        <p>Ein-/Ausstempeln direkt vom Homescreen-Widget – ohne die App zu öffnen. iOS 17 AppIntent macht es möglich.</p>
+      </div>
+      <div class="card feature-card fade-in fade-in-delay-2">
+        <div class="feature-icon">📅</div>
+        <h3>Schichtkalender</h3>
+        <p>Plane deine Schichten im übersichtlichen Kalender. Früh-, Spät-, Nacht- und freie Tage auf einen Blick.</p>
+      </div>
+      <div class="card feature-card fade-in fade-in-delay-3">
+        <div class="feature-icon">☕</div>
+        <h3>Pausenverwaltung</h3>
+        <p>Pausen starten und stoppen, Dauer kontrollieren. Gesetzliche Mindestpausen werden automatisch erkannt.</p>
+      </div>
+      <div class="card feature-card fade-in fade-in-delay-1">
+        <div class="feature-icon">📊</div>
+        <h3>Zeitkonto</h3>
+        <p>Überstunden, Sollzeit und Saldo werden automatisch berechnet. Monatsauswertung als Übersicht.</p>
+      </div>
+      <div class="card feature-card fade-in fade-in-delay-2">
+        <div class="feature-icon">🔲</div>
+        <h3>Homescreen-Widgets</h3>
+        <p>Klein, mittel und groß. Farbige Statusanzeige – grün wenn eingestempelt, blau wenn fertig.</p>
+      </div>
+      <div class="card feature-card fade-in fade-in-delay-3">
+        <div class="feature-icon">🔒</div>
+        <h3>100% Privat</h3>
+        <p>Alle Daten bleiben auf deinem Gerät. Keine Cloud, keine Registrierung, kein Tracking. Deine Daten gehören dir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- How it works -->
+<section id="how">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">So geht's</span>
+      <h2 class="section-title">In 4 Schritten startklar</h2>
+      <p class="section-subtitle">Setup dauert unter 2 Minuten.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="card step fade-in fade-in-delay-1">
+        <div class="step-number">1</div>
+        <h3>App installieren</h3>
+        <p>SchichtBuddy aus dem App Store herunterladen und öffnen.</p>
+      </div>
+      <div class="card step fade-in fade-in-delay-2">
+        <div class="step-number">2</div>
+        <h3>Schichten anlegen</h3>
+        <p>Deine Schichtvorlagen (Früh, Spät, Nacht) einmalig konfigurieren.</p>
+      </div>
+      <div class="card step fade-in fade-in-delay-3">
+        <div class="step-number">3</div>
+        <h3>Widget setzen</h3>
+        <p>Das SchichtBuddy-Widget auf den Homescreen ziehen – fertig.</p>
+      </div>
+      <div class="card step fade-in fade-in-delay-4">
+        <div class="step-number">4</div>
+        <h3>Loslegen</h3>
+        <p>Widget antippen → eingestempelt. Arbeitstag beenden → ausstempeln.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Download -->
+<section id="download" class="download-section">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-label">Download</span>
+      <h2 class="section-title">Jetzt kostenlos testen</h2>
+      <p class="section-subtitle" style="margin: 0 auto 0;">Kein Abo. Keine Anmeldung. Einfach herunterladen und loslegen.</p>
+    </div>
+    <div class="download-cards">
+      <div class="glass card download-card fade-in fade-in-delay-1">
+        <span class="download-card-icon"></span>
+        <h3>iOS / iPadOS</h3>
+        <p>Für iPhone und iPad<br/>ab iOS 16</p>
+        <a href="https://apps.apple.com/app/schichtbuddy/id000000000" class="store-badge" aria-label="Im App Store herunterladen">
+          📲 App Store
+        </a>
+      </div>
+      <div class="glass card download-card fade-in fade-in-delay-2">
+        <span class="download-card-icon">🤖</span>
+        <h3>Android</h3>
+        <p>Google Play<br/>Demnächst verfügbar</p>
+        <span class="store-badge coming-soon" aria-label="Demnächst im Play Store">
+          ⏳ Demnächst
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span>© 2026 SchichtBuddy · Matilla Comic</span>
+      <nav class="footer-links" aria-label="Footer Links">
+        <a href="privacy.html">Datenschutz</a>
+        <a href="support.html">Support</a>
+        <a href="mailto:support@schichtbuddy.app">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
