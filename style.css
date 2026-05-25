@@ -100,13 +100,10 @@ a:hover { color: #fff; }
 .nav-logo-icon {
   width: 34px;
   height: 34px;
-  background: linear-gradient(135deg, #4fc3f7, #0288d1);
   border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  box-shadow: 0 4px 12px rgba(79, 195, 247, 0.3);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(255, 167, 38, 0.3);
+  flex-shrink: 0;
 }
 
 .nav-links {
