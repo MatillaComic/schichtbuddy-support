@@ -4,143 +4,88 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Datenschutzerklärung – SchichtBuddy</title>
-  <meta name="description" content="Datenschutzerklärung für die SchichtBuddy App. Alle Daten bleiben auf deinem Gerät – keine Cloud, kein Tracking." />
+  <meta name="description" content="Datenschutzerklärung für SchichtBuddy. Lokale Nutzung ohne Account möglich. Optionaler Cloud-Sync mit Firebase." />
   <meta name="theme-color" content="#0a0a0f" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    .privacy-content {
-      max-width: 760px;
-      margin: 0 auto;
-    }
+    .privacy-content { max-width: 760px; margin: 0 auto; }
 
-    .privacy-intro {
-      background: rgba(79,195,247,0.06);
-      border: 1px solid rgba(79,195,247,0.2);
+    .privacy-summary {
+      background: rgba(57,198,255,0.06);
+      border: 1px solid rgba(57,198,255,0.2);
       border-radius: var(--radius-lg);
       padding: 1.8rem 2rem;
-      margin-bottom: 3rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
+      margin-bottom: 2.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
     }
+    .privacy-summary-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .privacy-summary strong { display: block; margin-bottom: 0.4rem; font-size: 1rem; color: var(--text); }
+    .privacy-summary p { font-size: 0.9rem; margin: 0; line-height: 1.6; color: var(--text-secondary); }
 
-    .privacy-intro-icon {
-      font-size: 1.8rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
+    .mode-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem;
     }
+    @media (max-width: 600px) { .mode-cards { grid-template-columns: 1fr; } }
+    .mode-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.4rem;
+    }
+    .mode-card.local { border-color: rgba(102,187,106,0.3); }
+    .mode-card.cloud { border-color: rgba(255,183,77,0.3); }
+    .mode-card h3 { margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .mode-card.local h3 { color: #66bb6a; }
+    .mode-card.cloud h3 { color: #ffb74d; }
+    .mode-card p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.6; }
 
-    .privacy-intro strong {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-size: 1rem;
-      color: var(--text);
+    .privacy-section { margin-bottom: 2.8rem; }
+    .privacy-section-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+      margin-bottom: 1.2rem;
     }
-
-    .privacy-intro p {
-      font-size: 0.9rem;
-      margin: 0;
-      line-height: 1.6;
+    .section-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(255,177,26,0.12); color: var(--accent);
+      font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
     }
-
-    .privacy-section {
-      margin-bottom: 3rem;
-    }
-
-    .privacy-section h2 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-    }
-
-    .privacy-section h3 {
-      font-size: 1rem;
-      margin: 1.5rem 0 0.5rem;
-      color: var(--accent);
-    }
-
-    .privacy-section p {
-      font-size: 0.925rem;
-      margin-bottom: 0.8rem;
-      line-height: 1.75;
-    }
-
-    .privacy-section ul, .privacy-section ol {
-      padding-left: 1.4rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .privacy-section li {
-      font-size: 0.925rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 0.3rem;
-    }
+    .privacy-section h2 { font-size: 1.15rem; margin: 0; color: var(--text); }
+    .privacy-section h3 { font-size: 0.95rem; margin: 1.2rem 0 0.4rem; color: var(--accent); }
+    .privacy-section p { font-size: 0.925rem; margin-bottom: 0.8rem; line-height: 1.75; color: var(--text-secondary); }
+    .privacy-section ul { padding-left: 1.4rem; margin-bottom: 0.8rem; }
+    .privacy-section li { font-size: 0.925rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.3rem; }
 
     .privacy-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-      font-size: 0.875rem;
+      width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem;
     }
-
     .privacy-table th {
-      text-align: left;
-      padding: 0.75rem 1rem;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-weight: 600;
+      text-align: left; padding: 0.7rem 1rem;
+      background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);
+      color: var(--text-secondary); font-weight: 600;
     }
-
     .privacy-table td {
-      padding: 0.7rem 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      color: var(--text-secondary);
-      vertical-align: top;
+      padding: 0.65rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--text-secondary); vertical-align: top;
     }
-
     .privacy-table tr:last-child td { border-bottom: none; }
 
-    .no-data-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: rgba(102,187,106,0.1);
-      border: 1px solid rgba(102,187,106,0.25);
-      color: #66bb6a;
-      padding: 0.25rem 0.75rem;
-      border-radius: 50px;
-      font-size: 0.75rem;
-      font-weight: 600;
+    .info-chip {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.9rem 1.1rem; border-radius: 10px; margin-bottom: 0.8rem;
+      font-size: 0.875rem; line-height: 1.55;
     }
+    .info-chip.green { background: rgba(102,187,106,0.08); border: 1px solid rgba(102,187,106,0.25); color: #a5d6a7; }
+    .info-chip.orange { background: rgba(255,183,77,0.08); border: 1px solid rgba(255,183,77,0.25); color: #ffcc80; }
+    .info-chip.red { background: rgba(255,82,82,0.08); border: 1px solid rgba(255,82,82,0.25); color: #ef9a9a; }
+    .info-chip.blue { background: rgba(79,195,247,0.08); border: 1px solid rgba(79,195,247,0.25); color: #80deea; }
 
     .meta-info {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.2rem 1.5rem;
-      margin-bottom: 3rem;
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.1rem 1.4rem; margin-bottom: 2.5rem;
+      display: flex; gap: 2rem; flex-wrap: wrap;
     }
-
-    .meta-item label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-tertiary);
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
-    .meta-item span {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
+    .meta-item label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); display: block; margin-bottom: 0.2rem; }
+    .meta-item span { font-size: 0.875rem; color: var(--text-secondary); }
   </style>
 </head>
 <body>
@@ -150,7 +95,6 @@
   <div class="bg-blob bg-blob-2"></div>
 </div>
 
-<!-- Navigation -->
 <nav class="nav" role="navigation" aria-label="Hauptnavigation">
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-icon">⏱</div>
@@ -163,12 +107,11 @@
   </ul>
 </nav>
 
-<!-- Page Header -->
 <div class="page-header">
   <div class="container">
     <span class="section-label">Rechtliches</span>
     <h1 class="fade-in">Datenschutz&shy;erklärung</h1>
-    <p class="fade-in fade-in-delay-1">Einfach erklärt: SchichtBuddy sammelt keine personenbezogenen Daten. Alles bleibt auf deinem Gerät.</p>
+    <p class="fade-in fade-in-delay-1">Lokal ohne Account – oder optional mit Cloud-Sync. Du entscheidest.</p>
   </div>
 </div>
 
@@ -178,189 +121,270 @@
 
       <!-- Meta -->
       <div class="meta-info fade-in">
-        <div class="meta-item">
-          <label>Version</label>
-          <span>1.2</span>
-        </div>
-        <div class="meta-item">
-          <label>Stand</label>
-          <span>Mai 2026</span>
-        </div>
-        <div class="meta-item">
-          <label>App</label>
-          <span>SchichtBuddy (iOS &amp; Android)</span>
-        </div>
-        <div class="meta-item">
-          <label>Datentransfer</label>
-          <span class="no-data-badge">✓ Kein Transfer</span>
+        <div class="meta-item"><label>Version</label><span>2.0</span></div>
+        <div class="meta-item"><label>Stand</label><span>Mai 2026</span></div>
+        <div class="meta-item"><label>App</label><span>SchichtBuddy (iOS &amp; Android)</span></div>
+        <div class="meta-item"><label>Gültig ab</label><span>Version 1.3</span></div>
+      </div>
+
+      <!-- Summary -->
+      <div class="privacy-summary fade-in">
+        <div class="privacy-summary-icon">🔒</div>
+        <div>
+          <strong>Deine Daten gehören dir.</strong>
+          <p>SchichtBuddy kann vollständig ohne Account genutzt werden. In diesem Fall verlässt kein einziges Byte dein Gerät. Cloud-Sync ist optional und wird nur aktiv, wenn du es bewusst einschaltest.</p>
         </div>
       </div>
 
-      <!-- Kurzzusammenfassung -->
-      <div class="privacy-intro fade-in">
-        <div class="privacy-intro-icon">🔒</div>
-        <div>
-          <strong>Kurz gesagt: Deine Daten gehören dir.</strong>
-          <p>SchichtBuddy ist eine vollständig offline arbeitende App. Es werden keine Daten an Server übertragen, keine Analytics-Tools eingesetzt und keine Nutzerprofile erstellt. Alle gespeicherten Informationen (Arbeitszeiten, Pausen, Schichten) verbleiben ausschließlich lokal auf deinem Gerät.</p>
+      <!-- Two modes -->
+      <div class="mode-cards fade-in">
+        <div class="mode-card local">
+          <h3>📱 Lokal-Modus (Standard)</h3>
+          <p>Kein Account erforderlich. Alle Daten bleiben auf deinem Gerät. Kein Internet, kein Tracking, keine Cloud.</p>
+        </div>
+        <div class="mode-card cloud">
+          <h3>☁️ Cloud-Sync (Optional)</h3>
+          <p>Mit Account und aktiviertem Sync werden Daten in Firebase gespeichert. Du aktivierst dies bewusst in den Einstellungen.</p>
         </div>
       </div>
 
       <!-- 1. Verantwortlicher -->
       <div class="privacy-section fade-in">
-        <h2>1. Verantwortlicher</h2>
-        <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) für die SchichtBuddy App:</p>
-        <p>
-          <strong>Matilla Comic</strong><br/>
-          E-Mail: <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a>
-        </p>
-        <p>Bei Fragen zum Datenschutz kannst du uns jederzeit unter der oben angegebenen E-Mail-Adresse kontaktieren.</p>
+        <div class="privacy-section-header">
+          <span class="section-num">1</span>
+          <h2>Verantwortlicher</h2>
+        </div>
+        <p>Verantwortlich im Sinne der DSGVO:</p>
+        <p><strong>Marius / MatillaComic</strong><br/>
+        E-Mail: <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a></p>
+        <p>Bei Fragen, Auskunftsersuchen oder Löschanträgen wende dich an die oben angegebene E-Mail-Adresse.</p>
       </div>
 
-      <!-- 2. Welche Daten werden verarbeitet -->
+      <!-- 2. Lokal -->
       <div class="privacy-section fade-in">
-        <h2>2. Welche Daten werden gespeichert?</h2>
-        <p>Die App speichert ausschließlich Daten, die du selbst eingibst oder die durch deine Nutzung der App entstehen:</p>
-
+        <div class="privacy-section-header">
+          <span class="section-num">2</span>
+          <h2>Nutzung ohne Account (Lokal-Modus)</h2>
+        </div>
+        <p>SchichtBuddy kann vollständig <strong>ohne Registrierung und ohne Login</strong> genutzt werden.</p>
+        <div class="info-chip green">✓ Keine Daten an externe Server · Kein Account · Kein Internet erforderlich</div>
+        <p>Lokal gespeicherte Daten (SQLite auf deinem Gerät):</p>
         <table class="privacy-table">
           <thead>
-            <tr>
-              <th>Datenkategorie</th>
-              <th>Speicherort</th>
-              <th>Übertragung</th>
-            </tr>
+            <tr><th>Datenkategorie</th><th>Speicherort</th><th>Übertragung</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Arbeitszeitstempel (Ein-/Ausstempel)</td>
-              <td>Lokal (SQLite)</td>
-              <td class="no-data-badge" style="display:table-cell; background:transparent; border:none; padding: 0.7rem 1rem;">✕ Keine</td>
-            </tr>
-            <tr>
-              <td>Pausenzeiten und -dauer</td>
-              <td>Lokal (SQLite)</td>
-              <td style="color:var(--text-tertiary)">✕ Keine</td>
-            </tr>
-            <tr>
-              <td>Schichtvorlagen (Name, Zeiten, Farbe)</td>
-              <td>Lokal (SQLite)</td>
-              <td style="color:var(--text-tertiary)">✕ Keine</td>
-            </tr>
-            <tr>
-              <td>Kalendereinträge &amp; Urlaubstage</td>
-              <td>Lokal (SQLite)</td>
-              <td style="color:var(--text-tertiary)">✕ Keine</td>
-            </tr>
-            <tr>
-              <td>App-Einstellungen (Sprache, Ton etc.)</td>
-              <td>Lokal (UserDefaults)</td>
-              <td style="color:var(--text-tertiary)">✕ Keine</td>
-            </tr>
-            <tr>
-              <td>Profilbild (optional)</td>
-              <td>Lokal (Dateisystem)</td>
-              <td style="color:var(--text-tertiary)">✕ Keine</td>
-            </tr>
+            <tr><td>Schichten &amp; Kalendereinträge</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
+            <tr><td>Arbeitszeitstempel</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
+            <tr><td>Pausenzeiten</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
+            <tr><td>Zeitkonto &amp; Salden</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
+            <tr><td>Abrechnungseinstellungen</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
+            <tr><td>Schichtvorlagen</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
+            <tr><td>Checklisten</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
+            <tr><td>App-Einstellungen</td><td>Lokal (SQLite)</td><td>Keine</td></tr>
           </tbody>
         </table>
-
-        <p>Es werden <strong>keine personenbezogenen Daten</strong> wie Name, E-Mail-Adresse, Standort oder Gerätekennungen an externe Server übermittelt.</p>
       </div>
 
-      <!-- 3. Kein Tracking -->
+      <!-- 3. Account / Login -->
       <div class="privacy-section fade-in">
-        <h2>3. Kein Tracking, keine Analytics</h2>
-        <p>SchichtBuddy enthält:</p>
+        <div class="privacy-section-header">
+          <span class="section-num">3</span>
+          <h2>Optionaler Account &amp; Login</h2>
+        </div>
+        <p>Du kannst freiwillig einen Account erstellen, um Cloud-Sync zu nutzen. Die Registrierung ist optional und jederzeit rückgängig machbar.</p>
+        <h3>Login-Methoden</h3>
+        <p>Authentifizierung über <strong>Firebase Authentication</strong> (Google Ireland Limited):</p>
         <ul>
-          <li>❌ Keine Analyse- oder Tracking-SDKs (z. B. Firebase Analytics, Mixpanel, Amplitude)</li>
-          <li>❌ Keine Werbebibliotheken</li>
-          <li>❌ Keine Absturzberichte an externe Server</li>
-          <li>❌ Keine In-App-Käufe oder Zahlungsdaten</li>
-          <li>❌ Keine Social-Login-Integration</li>
+          <li><strong>Apple Sign-In:</strong> Über Apple-Account. Apple kann eine anonymisierte Relay-E-Mail liefern. Es gelten Apples Datenschutzbestimmungen.</li>
+          <li><strong>Google Sign-In:</strong> Über Google-Account. Es gelten Googles Datenschutzbestimmungen.</li>
+          <li><strong>E-Mail / Passwort:</strong> Direkte Registrierung mit E-Mail-Adresse bei Firebase.</li>
         </ul>
-        <p>Das App Privacy Manifest (<code>PrivacyInfo.xcprivacy</code>) der App deklariert ausschließlich die Nutzung von <em>NSUserDefaults</em> (für Widget-Datenaustausch) und <em>Datei-Timestamps</em> (für Synchronisation der Widget-Daten) – beides ausschließlich lokal.</p>
-      </div>
-
-      <!-- 4. Berechtigungen -->
-      <div class="privacy-section fade-in">
-        <h2>4. Systemberechtigungen</h2>
-
-        <h3>Fotomediathek</h3>
-        <p>Die App fragt optional nach Zugriff auf deine Fotomediathek, damit du ein <strong>Profilbild auswählen</strong> kannst. Diese Berechtigung ist freiwillig und kann jederzeit in den iOS-Einstellungen entzogen werden. Das gewählte Bild wird ausschließlich lokal auf deinem Gerät gespeichert.</p>
-
-        <h3>App-Gruppen (iOS)</h3>
-        <p>SchichtBuddy nutzt eine iOS App-Gruppe (<code>group.com.matillacomic.schichtbuddy</code>), um Daten zwischen der Haupt-App und dem Homescreen-Widget zu teilen. Diese Kommunikation findet vollständig lokal auf dem Gerät statt und verlässt es nicht.</p>
-
-        <h3>Keine weiteren Berechtigungen</h3>
-        <p>Die App beansprucht keine weiteren Systemberechtigungen. Insbesondere:</p>
+        <h3>Verarbeitete Daten bei Login</h3>
         <ul>
-          <li>❌ Kein Standortzugriff</li>
-          <li>❌ Kein Microfonzugriff</li>
-          <li>❌ Kein Kamerazugriff</li>
-          <li>❌ Kein Kontaktzugriff</li>
-          <li>❌ Kein Zugriff auf Kalender oder Erinnerungen</li>
-          <li>❌ Kein Bluetooth</li>
+          <li>E-Mail-Adresse oder Anbieter-User-ID</li>
+          <li>Firebase User-ID (UID) zur internen Datenzuordnung</li>
+          <li>Login-Zeitstempel (durch Firebase Authentication)</li>
         </ul>
+        <p><small>Rechtsgrundlage: Freiwillige Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) bzw. Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO).</small></p>
       </div>
 
-      <!-- 5. Datenlöschung -->
+      <!-- 4. Cloud-Sync -->
       <div class="privacy-section fade-in">
-        <h2>5. Datenlöschung</h2>
-        <p>Da alle Daten ausschließlich lokal auf deinem Gerät gespeichert werden, kannst du sie jederzeit vollständig löschen:</p>
+        <div class="privacy-section-header">
+          <span class="section-num">4</span>
+          <h2>Cloud-Sync (optionaler Firestore-Sync)</h2>
+        </div>
+        <div class="info-chip orange">☁ Cloud-Sync ist standardmäßig deaktiviert. Er wird nur aktiv, wenn du (1) einen Account erstellst und (2) den Sync in den Einstellungen explizit einschaltest.</div>
+        <p>Bei aktivem Sync können folgende Daten in <strong>Google Firestore</strong> gespeichert werden:</p>
         <ul>
-          <li><strong>Einzelne Einträge löschen:</strong> In der App über die jeweilige Bearbeitungsansicht</li>
-          <li><strong>Alle Daten löschen:</strong> App deinstallieren – alle App-Daten werden dabei vollständig entfernt</li>
-          <li><strong>iOS Einstellungen → Datenschutz:</strong> Fotoberechtigungen jederzeit entziehbar</li>
+          <li>Schichtkalender &amp; Kalendereinträge</li>
+          <li>Arbeitszeiteinträge &amp; Sessions</li>
+          <li>Zeitkonto &amp; Salden</li>
+          <li>Nachträge &amp; Korrekturen</li>
+          <li>Abrechnungseinstellungen &amp; Lohnregeln</li>
+          <li>Bundesland / Feiertagseinstellungen</li>
+          <li>Schichtvorlagen, Checklisten, App-Einstellungen</li>
         </ul>
-        <p>Es gibt keine serverseitigen Daten, die auf Anfrage gelöscht werden müssten.</p>
-      </div>
-
-      <!-- 6. Drittanbieter -->
-      <div class="privacy-section fade-in">
-        <h2>6. Drittanbieter &amp; Dienste</h2>
-        <p>SchichtBuddy verwendet folgende Frameworks und Bibliotheken:</p>
+        <h3>Zweck der Verarbeitung</h3>
         <ul>
-          <li><strong>Flutter</strong> (Google) – plattformübergreifendes App-Framework; verarbeitet keine Nutzerdaten</li>
-          <li><strong>sqflite</strong> – lokale SQLite-Datenbankbibliothek; keine externe Verbindung</li>
-          <li><strong>shared_preferences</strong> – lokale Schlüssel-Wert-Speicherung; keine externe Verbindung</li>
+          <li>Synchronisierung zwischen Mobiltelefon und Tablet</li>
+          <li>Datensicherung (Backup)</li>
+          <li>Wiederherstellung nach Gerätewechsel</li>
         </ul>
-        <p>Alle genutzten Flutter-Pakete sind ausschließlich lokale Helfer ohne Netzwerkkommunikation.</p>
-
-        <h3>App Store</h3>
-        <p>Beim Download über den Apple App Store gelten die Datenschutzbestimmungen von Apple (<a href="https://www.apple.com/de/privacy/" target="_blank" rel="noopener">apple.com/de/privacy</a>). Der App-Entwickler hat darauf keinen Einfluss.</p>
+        <p><small>Datenpfad in Firestore: <code>users/{deine-Firebase-UID}/…</code> — Nur du hast Lese- und Schreibrechte auf diese Daten.</small></p>
       </div>
 
-      <!-- 7. Rechte -->
+      <!-- 5. Firebase -->
       <div class="privacy-section fade-in">
-        <h2>7. Deine Rechte (DSGVO)</h2>
-        <p>Da SchichtBuddy keine personenbezogenen Daten erhebt oder verarbeitet, entfällt eine Vielzahl der klassischen DSGVO-Rechte in der Praxis. Dennoch stehen dir folgende Rechte zu:</p>
+        <div class="privacy-section-header">
+          <span class="section-num">5</span>
+          <h2>Firebase &amp; Google Dienste</h2>
+        </div>
+        <table class="privacy-table">
+          <thead>
+            <tr><th>Dienst</th><th>Zweck</th><th>Aktiv</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Firebase Authentication</td><td>Anmeldung &amp; Identität</td><td>Bei Login</td></tr>
+            <tr><td>Cloud Firestore</td><td>Cloud-Datenspeicher</td><td>Bei Sync</td></tr>
+            <tr><td>Firebase Storage</td><td>Dokumente (geplant)</td><td>Noch nicht aktiv</td></tr>
+            <tr><td>Firebase Analytics</td><td>Analyse</td><td>Nicht aktiviert</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Anbieter:</strong> Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland<br/>
+        Datenschutz: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+        <p><small>Datenübertragungen in die USA erfolgen auf Basis von EU-Standardvertragsklauseln (SCCs).</small></p>
+      </div>
+
+      <!-- 6. Kamera -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">6</span>
+          <h2>Kamera &amp; Fotos</h2>
+        </div>
+        <p>Die App nutzt Kamera und Fotozugriff für:</p>
         <ul>
-          <li><strong>Auskunftsrecht (Art. 15 DSGVO):</strong> Du kannst jederzeit anfragen, welche Daten über dich vorliegen.</li>
-          <li><strong>Berichtigungsrecht (Art. 16 DSGVO):</strong> Daten können direkt in der App bearbeitet werden.</li>
-          <li><strong>Löschungsrecht (Art. 17 DSGVO):</strong> Durch Deinstallation der App werden alle lokalen Daten gelöscht.</li>
-          <li><strong>Beschwerderecht:</strong> Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren.</li>
+          <li>Schichtplan-Import: Foto eines gedruckten Schichtplans analysieren</li>
+          <li>OCR-Bildanalyse (ML Kit Text Recognition – läuft <strong>vollständig lokal auf dem Gerät</strong>)</li>
+          <li>Optionaler Dokumentenimport</li>
         </ul>
-        <p>Für Anfragen erreichst du uns unter: <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a></p>
+        <div class="info-chip green">✓ Bilder werden nur verarbeitet, wenn du sie aktiv auswählst. OCR-Analyse: lokal. Kein automatischer Cloud-Upload von Bildern.</div>
+        <p>Die Berechtigung ist freiwillig und kann jederzeit in den Geräteeinstellungen entzogen werden.</p>
       </div>
 
-      <!-- 8. Kinder -->
+      <!-- 7. Benachrichtigungen -->
       <div class="privacy-section fade-in">
-        <h2>8. Kinder unter 13 Jahren</h2>
-        <p>SchichtBuddy ist für den Einsatz im Berufsumfeld konzipiert. Die App richtet sich nicht an Kinder unter 13 Jahren. Da keine personenbezogenen Daten erhoben werden, besteht kein besonderes Risiko für Minderjährige.</p>
+        <div class="privacy-section-header">
+          <span class="section-num">7</span>
+          <h2>Push- &amp; Lokalbenachrichtigungen</h2>
+        </div>
+        <p>Lokale Benachrichtigungen werden gesendet für:</p>
+        <ul>
+          <li>Schichterinnerungen vor Schichtbeginn</li>
+          <li>Arbeitszeitstempel-Erinnerungen</li>
+          <li>Aufgaben &amp; Checklisten</li>
+        </ul>
+        <div class="info-chip blue">📱 Benachrichtigungen werden lokal auf dem Gerät geplant und versandt. Keine externen Push-Server.</div>
+        <p>Die Berechtigung ist optional und kann in den Geräteeinstellungen widerrufen werden.</p>
       </div>
 
-      <!-- 9. Änderungen -->
+      <!-- 8. Standort -->
       <div class="privacy-section fade-in">
-        <h2>9. Änderungen dieser Erklärung</h2>
-        <p>Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf zu aktualisieren, z. B. bei neuen App-Funktionen oder geänderten rechtlichen Anforderungen. Die aktuelle Version ist stets auf dieser Seite verfügbar. Das Datum der letzten Aktualisierung ist oben angegeben.</p>
+        <div class="privacy-section-header">
+          <span class="section-num">8</span>
+          <h2>Standort</h2>
+        </div>
+        <p>Die App erhebt <strong>keinen Standort</strong> und fordert keine Standortberechtigung an.</p>
+        <p>Optionale Adressfelder (Arbeitsort / Wohnort) in den Einstellungen werden lokal gespeichert. Im lokalen Modus verlassen sie das Gerät nicht; im Cloud-Sync-Modus können sie optional synchronisiert werden.</p>
       </div>
 
-      <!-- 10. Kontakt -->
+      <!-- 9. Widgets -->
       <div class="privacy-section fade-in">
-        <h2>10. Kontakt</h2>
-        <p>Bei Fragen, Anmerkungen oder Auskunftsersuchen zur Datenschutzerklärung:</p>
-        <p>
-          📧 <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a>
-        </p>
+        <div class="privacy-section-header">
+          <span class="section-num">9</span>
+          <h2>iOS Widgets &amp; App-Gruppen</h2>
+        </div>
+        <p>SchichtBuddy nutzt iOS App-Gruppen (<code>group.com.matillacomic.schichtbuddy</code>) um Daten zwischen der Haupt-App und dem Homescreen-Widget zu teilen. Diese Kommunikation findet vollständig lokal auf dem Gerät statt.</p>
+      </div>
+
+      <!-- 10. Keine Weitergabe -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">10</span>
+          <h2>Keine Datenweitergabe</h2>
+        </div>
+        <div class="info-chip red">✕ Daten werden nicht verkauft und nicht an Dritte weitergegeben.</div>
+        <p>Ausnahmen gelten nur für technische Dienstleister, die zur App-Funktion notwendig sind (z. B. Firebase/Google für Cloud-Sync) – und auch nur bei aktiviertem Cloud-Sync. Diese Dienstleister sind vertraglich zur Einhaltung des Datenschutzes verpflichtet.</p>
+      </div>
+
+      <!-- 11. Rechte -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">11</span>
+          <h2>Deine Rechte (DSGVO)</h2>
+        </div>
+        <ul>
+          <li><strong>Auskunft (Art. 15):</strong> Welche Daten über dich vorliegen</li>
+          <li><strong>Berichtigung (Art. 16):</strong> Direkt in der App möglich</li>
+          <li><strong>Löschung (Art. 17):</strong> Lokal via Deinstallation; Cloud via Account löschen</li>
+          <li><strong>Datenexport (Art. 20):</strong> Auf Anfrage via Support-E-Mail</li>
+          <li><strong>Sync deaktivieren:</strong> Mehr → Account &amp; Sync</li>
+          <li><strong>Account löschen:</strong> Mehr → Account &amp; Sync → Account löschen</li>
+          <li><strong>Widerspruch (Art. 21):</strong> Durch Abmelden und Account-Löschung</li>
+          <li><strong>Beschwerderecht</strong> bei der zuständigen Datenschutz-Aufsichtsbehörde</li>
+        </ul>
+        <p>Anfragen an: <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a></p>
+      </div>
+
+      <!-- 12. Account löschen -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">12</span>
+          <h2>Account &amp; Daten löschen</h2>
+        </div>
+        <p><strong>In der App:</strong> Mehr → Account &amp; Sync → Account löschen</p>
+        <p><strong>Per E-Mail:</strong> <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a><br/>
+        Betreff: „Datenlöschung SchichtBuddy"</p>
+        <p>Nach der Löschung: Firebase-Account wird gelöscht, Firestore-Daten werden entfernt, lokale Gerätedaten bleiben erhalten (Deinstallation entfernt alles).</p>
+      </div>
+
+      <!-- 13. Kinder -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">13</span>
+          <h2>Kinder</h2>
+        </div>
+        <p>SchichtBuddy ist für den professionellen Einsatz im Berufsumfeld konzipiert. Die App richtet sich <strong>nicht an Kinder unter 16 Jahren</strong>.</p>
+      </div>
+
+      <!-- 14. Disclaimer -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">14</span>
+          <h2>Haftungsausschluss – Lohnberechnungen</h2>
+        </div>
+        <div class="info-chip orange">ℹ Die Lohn- und Gehaltsberechnungen in SchichtBuddy sind Schätzungen und stellen keine Rechts- oder Steuerberatung dar.</div>
+        <p>Die Berechnungen basieren auf den von dir eingegebenen Parametern und ersetzen nicht die Prüfung durch einen Steuerberater oder die offizielle Lohnabrechnung deines Arbeitgebers. Für die Richtigkeit wird keine Haftung übernommen.</p>
+      </div>
+
+      <!-- 15. Änderungen -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">15</span>
+          <h2>Änderungen dieser Erklärung</h2>
+        </div>
+        <p>Diese Datenschutzerklärung kann bei Funktionserweiterungen oder geänderten rechtlichen Anforderungen aktualisiert werden. Die aktuelle Version ist in der App unter <strong>Mehr → Datenschutz</strong> sowie auf dieser Seite abrufbar.</p>
+        <p>Bei wesentlichen Änderungen informieren wir durch einen Hinweis beim App-Start.</p>
+      </div>
+
+      <!-- 16. Kontakt -->
+      <div class="privacy-section fade-in">
+        <div class="privacy-section-header">
+          <span class="section-num">16</span>
+          <h2>Kontakt</h2>
+        </div>
+        <p>📧 <a href="mailto:support@schichtbuddy.app">support@schichtbuddy.app</a></p>
         <p>Wir antworten in der Regel innerhalb von 48 Stunden.</p>
       </div>
 
@@ -368,11 +392,10 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <span>© 2026 SchichtBuddy · Matilla Comic</span>
+      <span>© 2026 SchichtBuddy · Marius / MatillaComic</span>
       <nav class="footer-links" aria-label="Footer Links">
         <a href="privacy.html">Datenschutz</a>
         <a href="support.html">Support</a>
